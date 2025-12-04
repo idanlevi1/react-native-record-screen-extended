@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-record-screen": ["./src/index"]
+      "react-native-record-screen-extended": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

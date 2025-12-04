@@ -1,4 +1,4 @@
-import { NativeModules, Dimensions } from 'react-native';
+import { NativeModules, Dimensions, Platform } from 'react-native';
 
 export const RecordingResult = {
   Started: 'started',
@@ -35,6 +35,7 @@ type RecordScreenNativeModule = {
     config: RecordScreenConfigType & { width: number; height: number }
   ): void;
   startRecording(): Promise<RecordingStartResponse>;
+  startRecordingEntireScreen(): Promise<RecordingStartResponse>;
   stopRecording(): Promise<RecordingResponse>;
   clean(): Promise<string>;
 };
@@ -59,6 +60,27 @@ class ReactNativeRecordScreenClass {
   startRecording(config: RecordScreenConfigType = {}) {
     this.setup(config);
     return RS.startRecording();
+  }
+
+  /**
+   * Start recording entire screen only (Android 14+ / API level 34+)
+   * 
+   * Uses MediaProjectionConfig.createConfigForDefaultDisplay() to block "Single app" recording option.
+   * On Android 13 and below (API < 34), falls back to regular startRecording() behavior.
+   * On iOS, always uses regular startRecording() as iOS doesn't have "Single app" option.
+   * 
+   * @param config Recording configuration options
+   * @returns Promise resolving to recording start response
+   */
+  startRecordingEntireScreen(config: RecordScreenConfigType = {}) {
+    this.setup(config);
+    if (Platform.OS === 'android' && Platform.Version >= 34) {
+      // Android 14+ (API 34+): Use new MediaProjectionConfig API
+      return RS.startRecordingEntireScreen();
+    } else {
+      // Android 13- or iOS: Use regular startRecording
+      return RS.startRecording();
+    }
   }
 
   stopRecording() {

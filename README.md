@@ -1,8 +1,26 @@
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://stand-with-ukraine.pp.ua)
 
-# react-native-record-screen
+# react-native-record-screen-extended
 
-A screen record module for React Native.
+A screen record module for React Native with enhanced MediaProjectionConfig support for Android 14+.
+
+## 🆕 What's New in Extended Version?
+
+> **Enhanced Android 14+ Support**: This fork adds a new `startRecordingEntireScreen()` method that uses Android's `MediaProjectionConfig.createConfigForDefaultDisplay()` API to **block the "Single app" recording option** on Android 14+, forcing entire screen recording for security and compliance requirements.
+
+### Key Differences from Original Package
+
+| Feature | Original Package | **Extended Package** ✨ |
+|---------|-----------------|----------------------|
+| Basic screen recording | ✅ `startRecording()` | ✅ `startRecording()` (same behavior) |
+| "Single app" option (Android 14+) | ✅ Always allowed | ✅ **Choice**: Allow OR Block |
+| Force entire screen recording | ❌ Not possible | ✅ **New: `startRecordingEntireScreen()`** |
+| iOS Support | ✅ | ✅ (no changes) |
+| Backward Compatible | - | ✅ **100% compatible** |
+
+**Use Case**: Perfect for security applications, compliance requirements, and ensuring consistent recording behavior across Android versions.
+
+---
 
 - Support iOS >= 11.0 (Simulator is not work)
 
@@ -15,7 +33,7 @@ A screen record module for React Native.
 ## Installation
 
 ```sh
-npm install react-native-record-screen
+npm install react-native-record-screen-extended
 ```
 
 ### iOS
@@ -56,7 +74,7 @@ npx pod-install
 ### Recording full screen
 
 ```js
-import RecordScreen, { RecordingResult } from 'react-native-record-screen';
+import RecordScreen, { RecordingResult } from 'react-native-record-screen-extended';
 
 // recording start
 const res = RecordScreen.startRecording().catch((error) => console.error(error));
@@ -106,6 +124,35 @@ RecordScreen.startRecording({
 ```js
 RecordScreen.clean();
 ```
+
+## 🆕 Enhanced Screen Recording (Android 14+)
+
+### New Method: `startRecordingEntireScreen()`
+
+```javascript
+import RecordScreen from 'react-native-record-screen-extended';
+
+// Force entire screen recording (blocks "Single app" option)
+await RecordScreen.startRecordingEntireScreen({
+  fps: 30,
+  bitrate: 1000000,
+  mic: true
+});
+```
+
+### Platform Behavior
+- **Android 14+**: Uses MediaProjectionConfig to block "Single app" recording
+- **Android 13-**: Falls back to regular behavior  
+- **iOS**: Uses regular startRecording() (no "Single app" option exists)
+
+### Migration Guide
+- **Existing code**: No changes needed, `startRecording()` works as before
+- **New feature**: Use `startRecordingEntireScreen()` when you need to enforce full screen recording
+
+### Use Cases
+- Security applications requiring full context
+- Compliance and audit requirements
+- Consistent UX across Android versions
 
 ## License
 

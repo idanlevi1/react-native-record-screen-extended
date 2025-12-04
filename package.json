@@ -1,7 +1,7 @@
 {
-  "name": "react-native-record-screen",
-  "version": "0.6.2",
-  "description": "react-native-record-screen",
+  "name": "react-native-record-screen-extended",
+  "version": "0.6.3",
+  "description": "react-native-record-screen with enhanced MediaProjectionConfig support for Android 14+",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -43,13 +43,16 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/yutasuzuki/react-native-record-screen",
-  "author": "Yuta Suzuki <yutasuzuki.r@gmail.com> (https://github.com/yutasuzuki)",
+  "repository": "https://github.com/idanlevi1/react-native-record-screen-extended",
+  "author": "Idan Levi <idanlevi1@gmail.com> (https://github.com/idanlevi1)",
+  "contributors": [
+    "Idan Levi <idanlevi2@gmail.com> (forked and extended)"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yutasuzuki/react-native-record-screen/issues"
+    "url": "https://github.com/idanlevi1/react-native-record-screen-extended/issues"
   },
-  "homepage": "https://github.com/yutasuzuki/react-native-record-screen#readme",
+  "homepage": "https://github.com/idanlevi1/react-native-record-screen-extended#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

@@ -12,7 +12,7 @@ import {
   Alert,
 } from 'react-native';
 import Video from 'react-native-video';
-import RecordScreen, { RecordingResult } from 'react-native-record-screen';
+import RecordScreen, { RecordingResult } from 'react-native-record-screen-extended';
 
 export default function App() {
   const [uri, setUri] = useState<string>('');

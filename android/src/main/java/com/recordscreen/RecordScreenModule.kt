@@ -104,6 +104,21 @@ class RecordScreenModule(reactContext: ReactApplicationContext) : ReactContextBa
     currentActivity!!.startActivityForResult(permissionIntent, SCREEN_RECORD_REQUEST_CODE);
   }
 
+  private fun startRecordingEntireScreen() {
+    val mediaProjectionManager = reactApplicationContext.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager;
+    
+    val permissionIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+      // API 34+ (Android 14+): Use MediaProjectionConfig for default display only
+      val config = android.media.projection.MediaProjectionConfig.createConfigForDefaultDisplay()
+      mediaProjectionManager.createScreenCaptureIntent(config)
+    } else {
+      // API 33 and below: Use legacy method
+      mediaProjectionManager.createScreenCaptureIntent()
+    }
+    
+    currentActivity!!.startActivityForResult(permissionIntent, SCREEN_RECORD_REQUEST_CODE);
+  }
+
 
   @ReactMethod
   fun startRecording(promise: Promise) {
@@ -116,6 +131,19 @@ class RecordScreenModule(reactContext: ReactApplicationContext) : ReactContextBa
       println(e.toString());
     } catch (e: IOException) {
       println(e);
+      e.printStackTrace();
+      promise.reject("404", "error!!");
+    }
+  }
+
+  @ReactMethod
+  fun startRecordingEntireScreen(promise: Promise) {
+    startPromise = promise;
+    try {
+      startRecordingEntireScreen();
+    } catch (e: IllegalStateException) {
+      promise.reject("404", "error!");
+    } catch (e: IOException) {
       e.printStackTrace();
       promise.reject("404", "error!!");
     }
