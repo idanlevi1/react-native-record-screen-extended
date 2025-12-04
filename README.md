@@ -1,6 +1,14 @@
 # react-native-record-screen-extended
 
+[![npm version](https://badge.fury.io/js/react-native-record-screen-extended.svg)](https://badge.fury.io/js/react-native-record-screen-extended)
+[![npm downloads](https://img.shields.io/npm/dm/react-native-record-screen-extended.svg)](https://www.npmjs.com/package/react-native-record-screen-extended)
+[![license](https://img.shields.io/npm/l/react-native-record-screen-extended.svg)](https://github.com/idanlevi1/react-native-record-screen-extended/blob/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/idanlevi1/react-native-record-screen-extended.svg)](https://github.com/idanlevi1/react-native-record-screen-extended/issues)
+[![GitHub stars](https://img.shields.io/github/stars/idanlevi1/react-native-record-screen-extended.svg)](https://github.com/idanlevi1/react-native-record-screen-extended/stargazers)
+
 A screen record module for React Native with enhanced MediaProjectionConfig support for Android 14+.
+
+📦 **Package**: [react-native-record-screen-extended](https://www.npmjs.com/package/react-native-record-screen-extended)
 
 ## 🆕 What's New in Extended Version?
 
